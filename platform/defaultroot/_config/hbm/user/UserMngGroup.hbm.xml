@@ -1,0 +1,28 @@
+<?xml version="1.0"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name = "user.UserMngGroup" table = "USER_MNG_GROUP"  >
+		<id name  = "sid" type  = "int" column  = "SID"  >
+		</id>
+		<property name  = "mngGroupName" column = "MNG_GROUP_NAME" type = "string" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "mngGroupDesc" column = "MNG_GROUP_DESC" type = "string" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<many-to-one name = "creater" class = "user.UserInfo" not-null = "false">
+			<column name ="CREATE_ID" />
+		</many-to-one>
+		<property name  = "createTime" column = "CREATE_TIME" type = "java.sql.Timestamp" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<many-to-one name = "updater" class = "user.UserInfo" not-null = "false">
+			<column name ="UPDATE_ID" />
+		</many-to-one>
+		<property name  = "updateTime" column = "UPDATE_TIME" type = "java.sql.Timestamp" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<set name = "userInfos" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "USER_MNG_GROUP" />
+			</key>
+			<one-to-many class = "user.UserInfo" />
+		</set>
+	</class>
+</hibernate-mapping >

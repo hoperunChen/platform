@@ -1,0 +1,18 @@
+<?xml version="1.0"?> 
+<biz-flow>
+	<bizs>
+		<biz id="default" alias="*"></biz>
+	</bizs>
+	<state-machine mustTransit="true">
+		<actions>
+			<action id="Add-default" >
+			</action>
+			<action id="Update-default" >
+			</action>
+			<action id="Remove-default" >
+			</action>
+			<action id="ViewDetail-default" >
+			</action>
+		</actions>
+	</state-machine>
+</biz-flow>

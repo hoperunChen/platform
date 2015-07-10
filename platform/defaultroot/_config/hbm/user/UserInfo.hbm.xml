@@ -1,0 +1,155 @@
+<?xml version="1.0"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name = "user.UserInfo" table = "USER_INFO"  >
+		<id name  = "sid" type  = "int" column  = "SID"  >
+		</id>
+		<property name  = "userName" column = "USER_NAME" type = "string" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "hmName" column = "HM_NAME" type = "string" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "userPass" column = "USER_PASS" type = "string" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "idNum" column = "ID_NUM" type = "string" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "showName" column = "SHOW_NAME" type = "string" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "userOrder" column = "USER_ORDER" type = "java.lang.Double" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "userGender" column = "USER_GENDER" type = "int" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "residentialAddr" column = "RESIDENTIAL_ADDR" type = "string" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "homeTown" column = "HOME_TOWN" type = "string" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "defaultAddr" column = "DEFAULT_ADDR" type = "int" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "userTitle" column = "USER_TITLE" type = "string" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "userEmail" column = "USER_EMAIL" type = "string" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "userSite" column = "USER_SITE" type = "string" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "userNote" column = "USER_NOTE" type = "string" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "ipAddr" column = "IP_ADDR" type = "string" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "macAddr" column = "MAC_ADDR" type = "string" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<many-to-one name = "creater" class = "user.UserInfo" not-null = "false">
+			<column name ="CREATE_ID" />
+		</many-to-one>
+		<property name  = "createTime" column = "CREATE_TIME" type = "java.sql.Timestamp" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<many-to-one name = "updater" class = "user.UserInfo" not-null = "false">
+			<column name ="UPDATER_ID" />
+		</many-to-one>
+		<property name  = "updateTime" column = "UPDATE_TIME" type = "java.sql.Timestamp" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "userAvailId" column = "USER_AVAIL_ID" type = "int" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<many-to-one name = "userMngGroup" class = "user.UserMngGroup" not-null = "false">
+			<column name ="USER_MNG_GROUP" />
+		</many-to-one>
+		<property name  = "userStatus" column = "USER_STATUS" type = "int" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "namePic" column = "NAME_PIC" type = "string" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<set name = "userCreaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "CREATE_ID" />
+			</key>
+			<one-to-many class = "user.UserInfo" />
+		</set>
+		<set name = "userUpdaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "UPDATER_ID" />
+			</key>
+			<one-to-many class = "user.UserInfo" />
+		</set>
+		<set name = "mngCreaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "CREATE_ID" />
+			</key>
+			<one-to-many class = "user.UserMngGroup" />
+		</set>
+		<set name = "mngUpdaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "UPDATE_ID" />
+			</key>
+			<one-to-many class = "user.UserMngGroup" />
+		</set>
+		<set name = "roleMapCreaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "CREATE_ID" />
+			</key>
+			<one-to-many class = "auth.UserRoleMapping" />
+		</set>
+		<set name = "roleMapUpdaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "UPDATE_ID" />
+			</key>
+			<one-to-many class = "auth.UserRoleMapping" />
+		</set>
+		<set name = "roleupdaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "UPDATE_ID" />
+			</key>
+			<one-to-many class = "auth.RoleInfo" />
+		</set>
+		<set name = "rolecreaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "CREATE_ID" />
+			</key>
+			<one-to-many class = "auth.RoleInfo" />
+		</set>
+		<set name = "userRoleMappings" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "USER_INFO" />
+			</key>
+			<one-to-many class = "auth.UserRoleMapping" />
+		</set>
+		<set name = "roleModuleAuths" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "CREATE_ID" />
+			</key>
+			<one-to-many class = "auth.RoleModuleAuth" />
+		</set>
+		<set name = "subSysCreaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "CREATE_ID" />
+			</key>
+			<one-to-many class = "module.SubSystemList" />
+		</set>
+		<set name = "subSysUpdaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "UPDATE_ID" />
+			</key>
+			<one-to-many class = "module.SubSystemList" />
+		</set>
+		<set name = "moduleFuncCreaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "CREATE_ID" />
+			</key>
+			<one-to-many class = "module.ModuleFuncList" />
+		</set>
+		<set name = "moduleFuncUpdaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "UPDATE_ID" />
+			</key>
+			<one-to-many class = "module.ModuleFuncList" />
+		</set>
+		<set name = "moduleCreaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "CREATE_ID" />
+			</key>
+			<one-to-many class = "module.ModuleList" />
+		</set>
+		<set name = "moduleUpdaters" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "UPDATE_ID" />
+			</key>
+			<one-to-many class = "module.ModuleList" />
+		</set>
+	</class>
+</hibernate-mapping >

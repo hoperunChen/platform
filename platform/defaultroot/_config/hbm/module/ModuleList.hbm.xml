@@ -1,0 +1,39 @@
+<?xml version="1.0"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name = "module.ModuleList" table = "MODULE_LIST"  >
+		<id name  = "sid" type  = "int" column  = "SID"  >
+		</id>
+		<property name  = "modNo" column = "MOD_NO" type = "string" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "modName" column = "MOD_NAME" type = "string" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "modDesc" column = "MOD_DESC" type = "string" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "startTime" column = "START_TIME" type = "java.sql.Timestamp" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "appEntry" column = "APP_ENTRY" type = "string" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<many-to-one name = "creater" class = "user.UserInfo" not-null = "false">
+			<column name ="CREATE_ID" />
+		</many-to-one>
+		<property name  = "createTime" column = "CREATE_TIME" type = "java.sql.Timestamp" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<many-to-one name = "updater" class = "user.UserInfo" not-null = "false">
+			<column name ="UPDATE_ID" />
+		</many-to-one>
+		<property name  = "updateTime" column = "UPDATE_TIME" type = "java.sql.Timestamp" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<many-to-one name = "subSystemList" class = "module.SubSystemList" not-null = "true">
+			<column name ="SUB_SYSTEM_LIST" />
+		</many-to-one>
+		<property name  = "moduleStatus" column = "MODULE_STATUS" type = "int" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<set name = "moduleFuncLists" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "MODULE_LIST" />
+			</key>
+			<one-to-many class = "module.ModuleFuncList" />
+		</set>
+	</class>
+</hibernate-mapping >

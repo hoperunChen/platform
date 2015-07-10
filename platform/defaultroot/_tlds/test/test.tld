@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>test</short-name>
+	<!--OutputTag -->
+	<tag>
+		<name>out</name> <!-- tag名称 -->
+		<tag-class>com.test.web.tag.TestTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>name</name> <!-- 参数名称 -->
+			<required>false</required> <!-- 是否必填 -->
+			<rtexprvalue>false</rtexprvalue><!-- 是否支持运行时表达式取值就是是否可以<%=%>或则是${}方式传值。 
+				这是tag的强大功能。 -->
+		</attribute>
+	</tag>
+	<function>
+		<name>add</name>
+		<function-class>com.test.web.function.TestFunction</function-class>
+		<function-signature>java.lang.String add(int, int)</function-signature>
+	</function>
+</taglib> 
+

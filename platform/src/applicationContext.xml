@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	<!-- sessionFactory -->
+	
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>/WEB-INF/classes/std_config.properties</value>
+		</property>
+	</bean>
+	<bean id="dataSource" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+		<property name="mappingDirectoryLocations"> 
+			<list>  
+		    	<value>/_config/hbm/</value>
+	            <value>/**/_config/hbm/</value>  
+	        </list>
+		</property> 
+	</bean>
+	
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<aop:config proxy-target-class="true"><!--基于类的代理将起作用（这时需要cglib库）-->
+		<aop:pointcut expression="execution(public * com.orm.dao..*.*(..))"
+			id="bussinessService" />
+		<aop:advisor pointcut-ref="bussinessService" advice-ref="txAdvice" />
+	</aop:config>
+	
+	
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- test -->
+	<bean id="testSpringEntity" class="com.test.spring.TestSpringEntity">
+		<property name="intValue" value="1"></property>
+		<property name="stringValue" value="stringValue"></property>
+		<property name="listValue" >
+			<list>
+				<value>test</value>
+				<value>test1</value>
+				<value>test2</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="testHibernateTemplate" class="com.test.hibernatedao.TestHibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>  
+	</bean>
+	
+	<bean id="ormDao" class="com.orm.dao.OrmDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>  
+	</bean>
+	
+	<bean id="bizFlowWebAction" class="com.action.BizFlowWebAction">
+		<property name="ormDao" ref="ormDao"></property>  
+	</bean>
+	
+	<bean class="com.register.ApplicationContextRegister" />
+	
+	<bean id="keyGenerater" class="com.key.KeyGenerater">
+		<property name="ormDao" ref="ormDao"></property>
+	</bean>
+	
+	
+	 <import resource="classpath*:/*.action.xml" />
+	 
+	 <import resource="classpath*:/*.beans.xml" />
+	
+</beans>

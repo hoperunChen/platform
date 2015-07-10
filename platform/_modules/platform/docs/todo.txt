@@ -1,0 +1,40 @@
+daoHandler	
+编写一个findByQuery(queryname,{argName,argValue})去当前appid对应的sql存储文件(xx.sql.xml)中找到和queryname对应的sql,然后执行
+biz:
+	action
+		objectName,objectEvent,biz(需要先处理解析biz)
+		biz架构问题,
+doing		3.解析biz类 
+		4.处理bizflowWebAction
+			WebAction中,check方法应该分为两个,objectName和objectEvent
+			BizFlowWebAction.action方法中objectName参数已经不需要了只需要check Event.
+			BizFlowWebAction.getAction中应该check objectName
+		在BizFlow中添加getAction方法
+meta:
+	生成meta
+	解析meta
+el:
+	解析el表达式
+platform:
+pdmall:
+	pdmAll应该重构pdmAll应该是独立于系统的一个模块,并且各项参数应该在是外部传入的而不是什么时候需要什么时候取.
+	~将pdmParser改成xmlParser的装饰类
+	~将List<PdmTable>改为容器类
+	生成biz文件
+	!!!生成meta          
+exception:
+	编写dao层专用的exception
+	
+object:编写代码计数器
+	
+
+	
+	
+
+	
+
+	
+	
+	
+	
+	

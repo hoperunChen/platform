@@ -1,0 +1,32 @@
+orm:
+	ormEntity编写get(String o)/set(...)方法
+	实现方法
+biz:
+	controller
+		*.do-->page
+	action怎么处理?
+	!!!!!!!Controler 只作为转发器.不处理任何逻辑.把session和request传给action处理
+	有XXXwebAction extends bizFlowWebAction extends DaoWebAction extends webAction
+			现在实体action 继承的objWebConfig是有问题的.XXXwebAction 应该继承的是bizFlowWebAction 
+			相应参数也应传到 action 中 并且在webaction 中进行初始化操作
+			而不是像現在這樣 XXX.action.xml中配置的action 只用於存儲数据
+			(需要搞清楚怎么在spring装载的时候就执行action的init方法)
+	1.绘制bizflow处理流程图和时序图  OK
+	2.生成*.biz.xml OK
+platform:
+	编写一个反射工具类  ok
+	丶.在控制台程序代码中添加一个spring的获取bean的工具 (类似beanloader,可以在jsp或者java中自由获取已注册的bean) ok
+
+登录:
+	1.登录后台验证 ok
+	2.请求该怎么处理? springmvc返回的是页面. ok
+spring:
+	1.外加一个platform.bean.xml,用来注册平台所需的对象. ok
+pdmAll:
+	生成action
+	生成hbm时判断是否生成基础目录 ok
+	添加生成*.beans.xml 文件 ok
+	添加生成biz文件功能
+	修改action文件生成--添加biz文件路径
+序号:
+	生成序号. ok

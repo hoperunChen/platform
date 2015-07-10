@@ -1,0 +1,48 @@
+<?xml version="1.0"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name = "auth.RoleInfo" table = "ROLE_INFO"  >
+		<id name  = "sid" type  = "int" column  = "SID"  >
+		</id>
+		<property name  = "id" column = "ID" type = "int" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "roleName" column = "ROLE_NAME" type = "string" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "roleDesc" column = "ROLE_DESC" type = "string" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "domainName" column = "DOMAIN_NAME" type = "string" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "roleRank" column = "ROLE_RANK" type = "int" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "startTime" column = "START_TIME" type = "java.sql.Timestamp" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "expireTime" column = "EXPIRE_TIME" type = "java.sql.Timestamp" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<many-to-one name = "create" class = "user.UserInfo" not-null = "false">
+			<column name ="CREATE_ID" />
+		</many-to-one>
+		<property name  = "createTime" column = "CREATE_TIME" type = "java.sql.Timestamp" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<many-to-one name = "updater" class = "user.UserInfo" not-null = "false">
+			<column name ="UPDATE_ID" />
+		</many-to-one>
+		<property name  = "updateTime" column = "UPDATE_TIME" type = "java.sql.Timestamp" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<property name  = "roleStatus" column = "ROLE_STATUS" type = "int" not-null = "true" insert= "true" update= "true" >
+		</property>
+		<property name  = "roleMaxRank" column = "ROLE_MAX_RANK" type = "int" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<set name = "roleModuleAuths" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "ROLE_INFO" />
+			</key>
+			<one-to-many class = "auth.RoleModuleAuth" />
+		</set>
+		<set name = "userRoleMappings" inverse="true" cascade="persist, merge,save-update, evict, replicate, lock, refresh" >
+			<key>
+				<column name = "ROLE_INFO" />
+			</key>
+			<one-to-many class = "auth.UserRoleMapping" />
+		</set>
+	</class>
+</hibernate-mapping >

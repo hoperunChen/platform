@@ -1,0 +1,19 @@
+<?xml version="1.0"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name = "auth.RoleModuleAuth" table = "ROLE_MODULE_AUTH"  >
+		<id name  = "sid" type  = "int" column  = "SID"  >
+		</id>
+		<property name  = "createTime" column = "CREATE_TIME" type = "java.sql.Timestamp" not-null = "false" insert= "true" update= "true" >
+		</property>
+		<many-to-one name = "roleInfo" class = "auth.RoleInfo" not-null = "true">
+			<column name ="ROLE_INFO" />
+		</many-to-one>
+		<many-to-one name = "userInfo" class = "user.UserInfo" not-null = "true">
+			<column name ="CREATE_ID" />
+		</many-to-one>
+		<many-to-one name = "moduleFuncList" class = "module.ModuleFuncList" not-null = "true">
+			<column name ="MODULE_FUNC_LIST" />
+		</many-to-one>
+	</class>
+</hibernate-mapping >

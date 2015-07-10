@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<biz-flow>
+
+  <config>
+    <c:lib src="/_tpl/ui.xml" namespace="ui" />
+    <c:lib src="/_tpl/biz.xml" namespace="biz" />
+    <c:lib src="/_tpl/ds.xml" namespace="ds" />
+  </config>
+
+  <bizs>
+
+    <biz id="default" alias="*">
+    </biz>
+  </bizs>
+
+  <state-machine mustTransit="true"
+<#if table.stateField?has_content >  
+  stateField="${table.stateField}"
+</#if>
+  >
+
+    <states>
+    </states>
+
+    <actions>
+      <action id="ViewDetail-default" public="true">
+      </action>
+      
+      <action id="Add-default">
+      </action>
+      
+      <action id="Update-default">
+      </action>
+
+      <action id="Remove-default">
+      </action>
+      
+      <action id="Export-default" public="true">
+      </action>
+      
+      <action id="Import-default">
+      </action>
+
+    </actions>
+
+    <transitions>
+    <!--
+    	<transition from="${'$'}{cp:const.STATUS_WAITING_APPROVE}|${'$'}{cp:STATUS_REJECTED}" action="BizAction-passApprove" 
+    		to="${'$'}{cp:const.STATUS_APPROVED}" />
+    -->
+    </transitions>
+
+	<listeners>
+	<!--
+	  <on-transit >
+	  <source>
+	    <c:log info="from=${'$'}{fromState},to=${'$'}{toState} at ${'$'}{$thisContext}" />
+	   </source>
+	  </on-transit>
+	 -->
+	</listeners>
+
+  </state-machine>
+
+</biz-flow>

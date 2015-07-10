@@ -1,0 +1,78 @@
+@CHARSET "UTF-8";
+
+*{
+	margin:0px;
+	padding:0px;
+}
+
+body{
+	overflow: hidden;
+}
+
+
+.bg{
+	background:#3f3f3f;
+}
+
+.login_content{
+	margin:100px auto ;
+	width: 532px;
+	height:	302px;
+	background: url(_img/login_bg.png);
+	-moz-border-radius: 10px;      /* Gecko browsers */
+    -webkit-border-radius: 10px;   /* Webkit browsers */
+    border-radius:10px;            /* W3C syntax */
+}
+
+.login_content span.sys_name{
+	margin-left: 20px;
+	display:inline-block ;
+	height:50px;
+	line-height: 50px;
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: 5px;
+}
+
+.login_content .content_mid{
+	height:180px;
+}
+
+.login_content .content_bottom{
+	height:70px;
+}
+
+.content_mid ul{
+	padding-top:40px;
+	margin-left:20px;
+}
+
+.content_mid ul li{
+	list-style-type:none;
+	margin-top:30px;
+}
+
+.content_mid ul li span{
+	display:inline-block ;
+	color:#fff;
+	width:85px;
+	line-height:20px;
+	height:20px;
+}
+
+.content_mid ul li input{
+	background: url(_img/input_bg.png);
+	border:0px;
+	width:240px;
+	height:25px;
+	color:#585858;
+}
+
+.content_bottom div.login_button{
+	width:104px;
+	height:29px;
+	margin-top:10px;
+	margin-left:150px;
+	background: url(_img/login_btn_bg.jpg);
+	cursor: pointer;
+}

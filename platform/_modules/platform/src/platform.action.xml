@@ -1,0 +1,36 @@
+<?xml version="1.0"?> 
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id  = "UserInfoWebAction" parent = "bizFlowWebAction" init-method= "init" >
+		<property name  = "className" value = "user.UserInfo" />
+<property name  = "bizFlowDefinition" value = "defaultroot/_config/web/user/UserInfo.biz.xml" />
+	</bean>
+	<bean id  = "UserMngGroupWebAction" parent = "bizFlowWebAction" init-method= "init" >
+		<property name  = "className" value = "user.UserMngGroup" />
+<property name  = "bizFlowDefinition" value = "defaultroot/_config/web/user/UserMngGroup.biz.xml" />
+	</bean>
+	<bean id  = "RoleInfoWebAction" parent = "bizFlowWebAction" init-method= "init" >
+		<property name  = "className" value = "auth.RoleInfo" />
+<property name  = "bizFlowDefinition" value = "defaultroot/_config/web/auth/RoleInfo.biz.xml" />
+	</bean>
+	<bean id  = "RoleModuleAuthWebAction" parent = "bizFlowWebAction" init-method= "init" >
+		<property name  = "className" value = "auth.RoleModuleAuth" />
+<property name  = "bizFlowDefinition" value = "defaultroot/_config/web/auth/RoleModuleAuth.biz.xml" />
+	</bean>
+	<bean id  = "UserRoleMappingWebAction" parent = "bizFlowWebAction" init-method= "init" >
+		<property name  = "className" value = "auth.UserRoleMapping" />
+<property name  = "bizFlowDefinition" value = "defaultroot/_config/web/auth/UserRoleMapping.biz.xml" />
+	</bean>
+	<bean id  = "ModuleFuncListWebAction" parent = "bizFlowWebAction" init-method= "init" >
+		<property name  = "className" value = "module.ModuleFuncList" />
+<property name  = "bizFlowDefinition" value = "defaultroot/_config/web/module/ModuleFuncList.biz.xml" />
+	</bean>
+	<bean id  = "ModuleListWebAction" parent = "bizFlowWebAction" init-method= "init" >
+		<property name  = "className" value = "module.ModuleList" />
+<property name  = "bizFlowDefinition" value = "defaultroot/_config/web/module/ModuleList.biz.xml" />
+	</bean>
+	<bean id  = "SubSystemListWebAction" parent = "bizFlowWebAction" init-method= "init" >
+		<property name  = "className" value = "module.SubSystemList" />
+<property name  = "bizFlowDefinition" value = "defaultroot/_config/web/module/SubSystemList.biz.xml" />
+	</bean>
+</beans>
